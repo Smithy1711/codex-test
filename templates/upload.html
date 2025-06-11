@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+<head>
+    <title>Upload Photo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Upload Photo</h1>
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" name="photo" required><br>
+        <input type="text" name="prompt" placeholder="Design prompt" required><br>
+        <button type="submit">Upload</button>
+    </form>
+</body>
+</html>

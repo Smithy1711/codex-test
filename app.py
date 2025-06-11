@@ -1,0 +1,52 @@
+from flask import Flask, render_template, request, redirect, url_for, send_from_directory
+from werkzeug.utils import secure_filename
+from PIL import Image, ImageDraw, ImageFont
+import os
+
+app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = 'uploads'
+app.config['DESIGN_FOLDER'] = 'designed'
+
+os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+os.makedirs(app.config['DESIGN_FOLDER'], exist_ok=True)
+
+# Placeholder AI design function
+# In a real implementation this would call an AI service or model
+# to generate designs based on the user's prompt
+
+def apply_ai_design(image_path, prompt):
+    with Image.open(image_path) as img:
+        draw = ImageDraw.Draw(img)
+        font = ImageFont.load_default()
+        text = f"Design: {prompt}"
+        draw.text((10, 10), text, fill=(255, 0, 0), font=font)
+        output_path = os.path.join(app.config['DESIGN_FOLDER'], os.path.basename(image_path))
+        img.save(output_path)
+    return output_path
+
+@app.route('/', methods=['GET', 'POST'])
+def upload_photo():
+    if request.method == 'POST':
+        if 'photo' not in request.files:
+            return 'No file part', 400
+        file = request.files['photo']
+        prompt = request.form.get('prompt', '')
+        if file.filename == '':
+            return 'No selected file', 400
+        filename = secure_filename(file.filename)
+        upload_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        file.save(upload_path)
+        designed_path = apply_ai_design(upload_path, prompt)
+        return redirect(url_for('view_photo', filename=os.path.basename(designed_path)))
+    return render_template('upload.html')
+
+@app.route('/photo/<filename>')
+def view_photo(filename):
+    return render_template('photo.html', filename=filename)
+
+@app.route('/designed/<filename>')
+def designed_file(filename):
+    return send_from_directory(app.config['DESIGN_FOLDER'], filename)
+
+if __name__ == '__main__':
+    app.run(debug=True)
