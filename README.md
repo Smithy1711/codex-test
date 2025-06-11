@@ -1,5 +1,6 @@
 # AI Photo Book Site
 
+
 This project is a minimal example of a web application that lets users upload photos and generate a simple digital photo book with AI-driven designs.
 
 The AI design step is represented here by a placeholder function that overlays the user's prompt onto the uploaded image. In a production system you would replace this with calls to your preferred AI model or service.
