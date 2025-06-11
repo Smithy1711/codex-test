@@ -12,9 +12,9 @@ app.config['DESIGN_FOLDER'] = 'designed'
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 os.makedirs(app.config['DESIGN_FOLDER'], exist_ok=True)
 
-# Placeholder AI design function
-# In a real implementation this would call an AI service or model
-# to generate designs based on the user's prompt
+# AI design function
+# Tries to call the OpenAI API to generate a design and falls back to a
+# simple overlay if the request fails or no API key is provided
 
 def apply_ai_design(image_path, prompt):
     """Apply an AI generated design to the uploaded image."""
