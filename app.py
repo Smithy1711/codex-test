@@ -43,11 +43,23 @@ def upload_photo():
         if not designed_files:
             return 'No selected file', 400
         return render_template('photo.html', filenames=designed_files)
+        if 'photo' not in request.files:
+            return 'No file part', 400
+        file = request.files['photo']
+        prompt = request.form.get('prompt', '')
+        if file.filename == '':
+            return 'No selected file', 400
+        filename = secure_filename(file.filename)
+        upload_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        file.save(upload_path)
+        designed_path = apply_ai_design(upload_path, prompt)
+        return redirect(url_for('view_photo', filename=os.path.basename(designed_path)))
     return render_template('upload.html')
 
 @app.route('/photo/<filename>')
 def view_photo(filename):
     return render_template('photo.html', filenames=[filename])
+    return render_template('photo.html', filename=filename)
 
 @app.route('/designed/<filename>')
 def designed_file(filename):
