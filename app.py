@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory
 from werkzeug.utils import secure_filename
 from PIL import Image, ImageDraw, ImageFont
+import openai
+import requests
 import os
 
 app = Flask(__name__)
@@ -15,6 +17,27 @@ os.makedirs(app.config['DESIGN_FOLDER'], exist_ok=True)
 # to generate designs based on the user's prompt
 
 def apply_ai_design(image_path, prompt):
+    """Apply an AI generated design to the uploaded image."""
+    api_key = os.getenv("OPENAI_API_KEY")
+    if api_key:
+        try:
+            client = openai.OpenAI(api_key=api_key)
+            response = client.images.generate(
+                model="gpt-image-1",
+                prompt=prompt,
+                n=1,
+                size="1024x1024",
+            )
+            image_url = response.data[0].url
+            r = requests.get(image_url)
+            output_path = os.path.join(app.config['DESIGN_FOLDER'], os.path.basename(image_path))
+            with open(output_path, 'wb') as f:
+                f.write(r.content)
+            return output_path
+        except Exception as e:
+            print("OpenAI API error:", e)
+
+    # Fallback: simple overlay if API key is missing or request fails
     with Image.open(image_path) as img:
         draw = ImageDraw.Draw(img)
         font = ImageFont.load_default()
