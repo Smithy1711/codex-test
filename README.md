@@ -17,4 +17,4 @@ The AI design step is represented here by a placeholder function that overlays t
 3. Open your browser to `http://localhost:5000` to upload photos and create designs.
 
 Uploaded images are stored in the `uploads/` directory, and designed images are saved in `designed/`.
-Static assets such as `style.css` live in the `static/` folder.
+
