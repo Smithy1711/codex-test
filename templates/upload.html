@@ -1,6 +1,30 @@
 <!doctype html>
 <html>
 <head>
+    <title>Upload Photos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+    <aside class="sidebar">
+        <h2>AI PhotoBook</h2>
+        <p>Create stylish pages with AI generated designs.</p>
+    </aside>
+    <main class="main">
+        <h1>Create Your Photo Book</h1>
+        <form class="upload-form" method="post" enctype="multipart/form-data">
+            <input type="file" name="photos" multiple required><br>
+            <input type="text" name="prompt" placeholder="Design prompt" required><br>
+            <button type="submit">Upload</button>
+        </form>
+        <div class="cards">
+            <div class="card">Example Page 1</div>
+            <div class="card">Example Page 2</div>
+            <div class="card">Example Page 3</div>
+        </div>
+    </main>
+</div>
+
     <title>Upload Photo</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>

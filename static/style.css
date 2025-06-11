@@ -1,3 +1,87 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fafafa;
+    margin: 0;
+    color: #333;
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 220px;
+    background: #fff;
+    border-right: 1px solid #eee;
+    padding: 20px;
+}
+
+.main {
+    flex: 1;
+    padding: 40px 20px;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.upload-form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.card {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    width: 180px;
+    height: 240px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+button {
+    padding: 8px 16px;
+    border: none;
+    background: #333;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+button:hover {
+    background: #000;
+}
+
+input[type="file"], input[type="text"] {
+    margin: 10px 0;
+}
+
 body { font-family: Arial, sans-serif; background-color: #f5f5f5; padding: 20px; }
 h1 { color: #333; text-align: center; }
 form { background: #fff; padding: 20px; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); max-width: 400px; margin: auto; }

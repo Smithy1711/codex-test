@@ -15,6 +15,8 @@ The AI design step is represented here by a placeholder function that overlays t
    ```bash
    python app.py
    ```
+3. Open your browser to `http://localhost:5000` to upload photos and create designs. You can select multiple files at once and the app will generate a designed image for each one.
+=======
 3. Open your browser to `http://localhost:5000` to upload photos and create designs.
 
 Uploaded images are stored in the `uploads/` directory, and designed images are saved in `designed/`.

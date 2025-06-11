@@ -27,6 +27,22 @@ def apply_ai_design(image_path, prompt):
 @app.route('/', methods=['GET', 'POST'])
 def upload_photo():
     if request.method == 'POST':
+        files = request.files.getlist('photos')
+        if not files:
+            return 'No file part', 400
+        prompt = request.form.get('prompt', '')
+        designed_files = []
+        for file in files:
+            if file.filename == '':
+                continue
+            filename = secure_filename(file.filename)
+            upload_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            file.save(upload_path)
+            designed_path = apply_ai_design(upload_path, prompt)
+            designed_files.append(os.path.basename(designed_path))
+        if not designed_files:
+            return 'No selected file', 400
+        return render_template('photo.html', filenames=designed_files)
         if 'photo' not in request.files:
             return 'No file part', 400
         file = request.files['photo']
@@ -42,6 +58,7 @@ def upload_photo():
 
 @app.route('/photo/<filename>')
 def view_photo(filename):
+    return render_template('photo.html', filenames=[filename])
     return render_template('photo.html', filename=filename)
 
 @app.route('/designed/<filename>')
