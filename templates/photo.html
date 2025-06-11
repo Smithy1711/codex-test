@@ -1,11 +1,17 @@
 <!doctype html>
 <html>
 <head>
-    <title>Designed Photo</title>
+    <title>Designed Photos</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Your Designed Photo</h1>
-    <img src="{{ url_for('designed_file', filename=filename) }}" alt="Designed photo">
+    <h1>Your Designed Photos</h1>
+    <div class="cards">
+    {% for f in filenames %}
+        <div class="card">
+            <img src="{{ url_for('designed_file', filename=f) }}" alt="Designed photo">
+        </div>
+    {% endfor %}
+    </div>
 </body>
 </html>

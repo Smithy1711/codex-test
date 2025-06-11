@@ -1,7 +1,7 @@
 # AI Photo Book Site
 
 
-This project is a minimal example of a web application that lets users upload photos and generate a simple digital photo book with AI-driven designs.
+3. Open your browser to `http://localhost:5000` to upload photos and create designs. You can select multiple files at once and the app will generate a designed image for each one.
 
 The AI design step is represented here by a placeholder function that overlays the user's prompt onto the uploaded image. In a production system you would replace this with calls to your preferred AI model or service.
 
